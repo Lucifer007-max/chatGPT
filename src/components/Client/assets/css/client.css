@@ -122,3 +122,21 @@
 label{
     font-family: 'Lato', sans-serif !important;
 }
+.modal--header{
+    padding: 5px 19px !important;
+    /* flex-direction: column-reverse */
+    justify-content: center !important;
+}
+.modal-backdrop{
+    opacity: 0.8 !important;
+}
+.date-input{
+    border-radius: 0 !important;
+    border: none !important;
+    border-bottom: 1px solid #949494 !important;
+    cursor: pointer;
+}
+.small{
+    font-size: 0.77rem !important;
+    color: #676767;
+}

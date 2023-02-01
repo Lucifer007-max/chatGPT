@@ -31,7 +31,7 @@ function Registercomplete() {
   const handleNext = () => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
-        ? 
+        ?
         steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
@@ -57,22 +57,22 @@ function Registercomplete() {
 
 
     <div className='container w-50 m-auto'>
-        <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '100%' }}>
         <Stepper nonLinear activeStep={activeStep}>
-            {steps.map((label, index) => (<Step key={label} completed={completed[index]}> <StepButton color="inherit">{label}</StepButton></Step>  ))}
+          {steps.map((label, index) => (<Step key={label} completed={completed[index]}> <StepButton color="inherit">{label}</StepButton></Step>))}
         </Stepper>
         <div>
-            {allStepsCompleted() ? (<>
-                <Typography sx={{ mt: 2, mb: 1 }}>
-                    All steps completed - you&apos;re finished
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                    <Button onClick={handleReset}>Reset</Button>
-                </Box>
-            </>
-            ) : (
+          {allStepsCompleted() ? (<>
+            <Typography sx={{ mt: 2, mb: 1 }}>
+              All steps completed - you&apos;re finished
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+              <Button onClick={handleReset}>Reset</Button>
+            </Box>
+          </>
+          ) : (
             <>
-                <Typography sx={{ mt: 2, mb: 1, py: 1 }}> 
+              <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
                 {/* Step HI {activeStep + 1} */}
                 {/* {
                             activeStep.map((data, key) => {
@@ -81,36 +81,40 @@ function Registercomplete() {
                                 )
                             })
                         } */}
-                
-                
-                
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                <Button color="inherit" disabled={activeStep === 0}   onClick={handleBack}  sx={{ mr: 1 }}>Back</Button>
+
+
+
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>Back</Button>
                 <Button onClick={handleNext} sx={{ mr: 1 }}> Next </Button>
                 {
-                    activeStep !== steps.length && (completed[activeStep] ? (
+                  activeStep !== steps.length && (completed[activeStep] ? (
                     <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                        {/* Step HI {activeStep + 1} already completed */}
+                      {/* Step HI {activeStep + 1} already completed */}
 
-                        {
-                            activeStep.map((data, key) => {
-                                return (
-                                    <p key={key}>HI{data}</p>
-                                )
-                            })
-                        }
+                      {
+                        activeStep.map((data, key) => {
+                          return (
+                            <p key={key}>HI{data}</p>
+                          )
+                        })
+                      }
                     </Typography>
-                    ) : (  <Button onClick={handleComplete}> {completedSteps() === totalSteps() - 1 ? 'Finish':'Complete Step'}</Button>
-                    ))
+                  ) : (<Button onClick={handleComplete}> {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Complete Step'}</Button>
+                  ))
                 }
-                </Box>
+              </Box>
             </>
-            )}
+          )}
         </div>
-        </Box>
+      </Box>
     </div>
   );
 }
 
 export default Registercomplete;
+
+
+
+
