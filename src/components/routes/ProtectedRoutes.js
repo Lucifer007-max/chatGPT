@@ -1,12 +1,18 @@
-import React from 'react';
-import {Route ,  Navigate} from 'react-router-dom';
-function ProtectedRoutes({auth , component : Component , ...rest}) {
+import React from "react";
+import { Navigate, Redirect, Route } from "react-router-dom";
+
+function ProtectedRoute({ component: Component, ...restOfProps }) {
+  const isAuthenticated = localStorage.getItem("token");
+  console.log("this", isAuthenticated);
+
   return (
-    <Route {...rest}  render={(props) => {
-        if(auth)  return <Component />
-        if(!auth) return <Navigate to={{path:'/' , state: {from: props.location}}} />
-    }} />
-  )
+    <Route
+      {...restOfProps}
+      render={(props) =>
+        isAuthenticated ? <Component {...props} /> : <Navigate to="/" />
+      }
+    />
+  );
 }
 
-export default ProtectedRoutes
+export default ProtectedRoute;

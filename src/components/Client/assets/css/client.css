@@ -140,3 +140,88 @@ label{
     font-size: 0.77rem !important;
     color: #676767;
 }
+.btn-new{
+    padding: 10px 13px !important;
+}
+.s-sidebar__nav ul li {
+    list-style: none;
+}
+
+.sidebar ul{
+    padding: 9px 20px;
+    width: 100%;
+}
+@media (min-width:600px) {
+    .padding-top{
+        padding-top: 5rem;
+    }
+    
+}
+
+
+.chat--area{
+    /* height: 500px; */
+    border: 1px solid red;
+    /* overflow-y: auto; */
+    padding: 1rem;
+    padding-bottom: 11rem !important;
+}
+.search-Bar input{
+    background: #1a2039;
+    border: 0;
+    border-radius: 0;
+    padding: 0.85rem 13px;
+    color: #fff;
+}
+.search-Bar input:focus{
+    box-shadow: none;
+    color: #fff;
+    background-color: #1a2039;
+    border-color: #1a2039;
+}
+
+.search-Bar {
+    height: 100px;
+    background-image: linear-gradient(180deg,rgba(53,55,64,0),#353740 58.85%);
+    background-color: rgba(0, 0, 0, 0.1);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    padding: 20px;
+    /* margin: 30px; */
+    /* font-weight: bold;
+    position: fixed;
+    bottom: 0; */
+    /* width: 100vw; */
+}
+.main--child {
+    position: fixed;
+    bottom:-3px;
+    width: -webkit-fill-available !important;
+}
+
+.main--cont {
+    position: relative;
+}
+.send--svg {
+    fill: #fff !important;
+}
+
+.svgdiv{
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    background: #1a2039;
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    display: flex;
+    
+}
+
+
+@media (min-width:990px) {
+    .w-80 {
+        width: 80%;
+        margin: auto;
+    }
+}

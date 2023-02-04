@@ -7,23 +7,17 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Header() {
   return (
-    <Navbar bg="light" expand="lg" className='shadow sticky-top'>
+    <Navbar bg="dark" expand="lg" className='shadow sticky-top'>
       <Container>
-        <Navbar.Brand href="#home">IB ARTS AI</Navbar.Brand>
+        <Navbar.Brand href="#home" className='text-light'>IB ARTS AI</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" className=' justify-content-end'>
+        <Navbar.Collapse id="basic-navbar-nav" className=' justify-content-end text-light'>
           <Nav className="justify-content-end">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.1">Profile  </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
-                Separated link
+                Logout
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

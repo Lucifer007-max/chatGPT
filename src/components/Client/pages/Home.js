@@ -7,7 +7,9 @@ import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
 import Button from '@mui/material/Button';
 import Header from '../shared/Header';
-import Sidebar from '../shared/Sidebar'
+import AddIcon from '@mui/icons-material/Add';
+import Chat from './Chat';
+import SearchBar from './SearchBar';
 const Home = () => {
     const [show, setShow] = useState(false);
     const [optionselect , setOptionselect] = useState('');
@@ -26,20 +28,31 @@ const Home = () => {
     }
     return (
         <>
-        <Header/>
-        <div className='container'>
-            <div className='row'>
-                <div className='col-lg-3'>
-                    <Sidebar/>
-                </div>
-                
-                <div className='col-lg-9'>
-                </div>
-
+    <div className="layout has-sidebar fixed-sidebar fixed-header">
+      <div className="s-layout">
+        <div className="s-layout__sidebar">
+            <div className="s-sidebar__trigger" >
+            <h2 className='text-light logo--txt'>CHAT GPT AI</h2>
+                <i className="fa fa-bars">
+                </i>
+            {/* <Header /> */}
             </div>
-
+            <div>
+                <nav className="s-sidebar__nav sidebar">
+                <ul>
+                    <li>
+                        <Button variant="outlined" color="inherit" className='btn-new w-100 justify-content-evenly flex-row-reverse'> Add New Wrokspace <AddIcon/> </Button>
+                    </li>
+                </ul>
+                </nav>
+            </div>
         </div>
-
+        <main className="s-layout__content">
+            <Chat/>
+            <SearchBar/>
+        </main>
+      </div>
+    </div>
             
 
 
