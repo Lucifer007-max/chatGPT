@@ -1,18 +1,19 @@
 import React from "react";
-import { Navigate, Redirect, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({ component: Component, ...restOfProps }) {
-  const isAuthenticated = localStorage.getItem("token");
-  console.log("this", isAuthenticated);
-
-  return (
-    <Route
-      {...restOfProps}
-      render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Navigate to="/" />
+function ProtectedRoutes({ children }) {
+  const isToken = localStorage.getItem("token"); 
+  const isRole = localStorage.getItem("role"); 
+  if(!isToken){
+      return <Navigate to={'/'}/>
+  }
+  else{
+      if(isRole === 'user'){
+          return children
+      }else{
+          return <Navigate to={'/'}/>
       }
-    />
-  );
+  }
 }
 
-export default ProtectedRoute;
+export default ProtectedRoutes;

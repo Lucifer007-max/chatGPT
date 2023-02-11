@@ -5,13 +5,13 @@ import NotFound from './components/NotFound'
 import {Routes, Route,} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './components/Client/pages/Register';
-import Registercomplete from './components/Client/pages/Registercomplete';
 import Home from './components/Client/pages/Home';
 import UserList from './components/Admin/pages/UserList';
 import Registermanage from './components/Admin/pages/Registermanage';
-// import ProtectedRoutes from './components/routes/ProtectedRoutes';
-// import Admin from './components/Admin/Admin';
-
+import Profile from './components/Client/pages/Profile';
+import Adminlogin from './components/Admin/pages/Adminlogin';
+import Adminauth from './components/routes/Adminauth'
+import ProtectedRoutes from './components/routes/ProtectedRoutes';
 function App() {
   return( 
   <Routes>
@@ -19,14 +19,15 @@ function App() {
      {/* User Routing Start */}
       <Route path="/"  element={<Client />} />
       <Route path="/register"  element={<Register />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+      <Route path="/profile/:id" element={<Profile />} />
 
 
 
 
       {/* Admin Routing Start */}
-      
-      <Route path='/admin' element={<Admin/>} />
+      <Route path='/administrator/login' element={<Adminlogin/>} />
+      <Route path='/admin' element={ <Adminauth><Admin/></Adminauth>} />
       <Route path='/userList' element={<UserList/>} />
       <Route path='/register-management' element={<Registermanage/>} />
 

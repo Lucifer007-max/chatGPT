@@ -6,10 +6,14 @@ import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import Form from 'react-bootstrap/Form';
 import Button from '@mui/material/Button';
-import Header from '../shared/Header';
+import SendIcon from '@mui/icons-material/Send';
 import AddIcon from '@mui/icons-material/Add';
 import Chat from './Chat';
-import SearchBar from './SearchBar';
+// import SearchBar from './SearchBar';
+import Header from '../shared/Header'
+import { useCodeTypeMutation } from '../../../redux/chatIB';
+
+
 const Home = () => {
     const [show, setShow] = useState(false);
     const [optionselect , setOptionselect] = useState('');
@@ -20,11 +24,15 @@ const Home = () => {
        'West Bengal' : ['Kolkata' ,  'Raniganj' , 'Asn' , 'Durgapur'],
         'Maharastra' : ['Pune' ,  'Nagpur' , 'Bardi' , 'SEZ mihin']
     }
-    // closeButton
-
-
     const handleSubmit = (e) => {
         alert('hi')
+    }
+    const [search, setSearch] = useState('')
+    // const {data: list  , error , isSuccess ,  isFetching} = useCodeTypeMutation();
+    const [codeType] = useCodeTypeMutation();
+    const handleSearch = () => {
+        codeType({prompt:search})
+        // console.log(search);
     }
     return (
         <>
@@ -32,10 +40,8 @@ const Home = () => {
       <div className="s-layout">
         <div className="s-layout__sidebar">
             <div className="s-sidebar__trigger" >
-            <h2 className='text-light logo--txt'>CHAT GPT AI</h2>
-                <i className="fa fa-bars">
-                </i>
-            {/* <Header /> */}
+            {/* <h2 className='text-light logo--txt'>CHAT GPT AI</h2> */}
+            <Header />
             </div>
             <div>
                 <nav className="s-sidebar__nav sidebar">
@@ -48,8 +54,20 @@ const Home = () => {
             </div>
         </div>
         <main className="s-layout__content">
-            <Chat/>
-            <SearchBar/>
+            <Chat />
+            <div className='container main--cont  p-0'>
+                <div className='container main--child  p-0'>
+                    <div className='search-Bar '>
+                        <div className='w-80'>
+                            <div className='d-flex align-items-center position-relative'>
+                                <input type='text' placeholder='Search' name='search' onChange={(e)=> setSearch(e.target.value)} className='form-control' />
+                                <div className='svgdiv' onClick={handleSearch}><SendIcon className='send--svg'/></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* <SearchBar/> */}
         </main>
       </div>
     </div>
@@ -115,3 +133,9 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+
+
+

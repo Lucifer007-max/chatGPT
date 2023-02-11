@@ -1,61 +1,66 @@
 import { createSlice , createAsyncThunk } from "@reduxjs/toolkit";
 import config from "../config";
 
-// Admin Login ==== 
-export const  loginAdmin = createAsyncThunk('adminauth' , async (body)=> {
-    const res = await fetch(config.API + 'users/authenticateAdmin', {
+// User Login =====
+export const  loginUser = createAsyncThunk('userauth' , async (body)=> {
+    const res = await fetch(config.API + 'users/authenticateUser', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // Authorization: localStorage.getItem('token')
         },
         body: JSON.stringify(body)
     })
-    const amdinData = await res.json();
-    return amdinData;
+    const userData = await res.json();
+    return userData;
 })
 
 
-const initialState = {
+
+const  _user = {
     msg: '',
     role: '',
     token: '',
     loading: false,
     error: ''
-
 }
-const authSlice = createSlice({
-    name: 'auth',
-    initialState,
+const userauthSlice = createSlice({
+    name: 'userauth',
+    initialState : _user,
     reducers: {
         addToken: (state , action) => {
             state.token = localStorage.getItem('token')
         },
-        addUser: (state , action) => {
+        addRole: (state , action) => {
             state.role = localStorage.getItem('role')
         }
     },
     extraReducers: {
-        [loginAdmin.pending]: (state , action) => {
+        [loginUser.pending]: (state , action) => {
             state.loading = true;
         },
-        [loginAdmin.fulfilled]: (state , action) => {
+        [loginUser.fulfilled]: (state , action) => {
             state.loading = false;
             const {payload} = action;
             state.token = payload.token;
             state.role = payload.role;
             localStorage.setItem('token' , payload.token);
             localStorage.setItem('role' , payload.role);
+            // state.msg = payload.message;
         },
-        [loginAdmin.rejected]: (state , action) => {
+        [loginUser.rejected]: (state , action) => {
             state.loading = false;
-            const {payload} = action;
-            state.error = payload.message;
-            console.log('Error Msg Admin Login >>>>>>>>>' , payload.message);
+            // const {payload} = action;
+            // state.error = payload.message;
+            // console.log('Error Msg user Login >>>>>>>>>' , payload.message);
         }
     }
 })
 
 
-export const {authToken , addUser} = authSlice.actions;
-export default authSlice.reducer; 
+export const {authToken , addRole} = userauthSlice.actions;
+export default userauthSlice.reducer; 
+
+
+
+
+
