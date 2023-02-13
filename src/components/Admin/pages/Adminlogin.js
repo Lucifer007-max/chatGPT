@@ -10,8 +10,8 @@ function Adminlogin() {
     const dispatcher = useDispatch();
     const handleLogin = async (e) => {
         e.preventDefault();
-        // await dispatcher(loginAdmin(responseBody))
-        // navigate('/admin')
+        await dispatcher(loginAdmin(responseBody))
+        navigate('/admin')
     }
   return (
     <div>

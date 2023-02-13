@@ -20,6 +20,8 @@ const  _user = {
     msg: '',
     role: '',
     token: '',
+    Isapproved: '',
+    uName: '',
     loading: false,
     error: ''
 }
@@ -32,6 +34,12 @@ const userauthSlice = createSlice({
         },
         addRole: (state , action) => {
             state.role = localStorage.getItem('role')
+        },
+        addApprove: (state , action) => {
+            state.Isapproved = localStorage.getItem('approve')
+        },
+        addName: (state , action) => {
+            state.Isapproved = localStorage.getItem('uName')
         }
     },
     extraReducers: {
@@ -43,8 +51,12 @@ const userauthSlice = createSlice({
             const {payload} = action;
             state.token = payload.token;
             state.role = payload.role;
+            state.Isapproved = payload.Isapproved;
             localStorage.setItem('token' , payload.token);
             localStorage.setItem('role' , payload.role);
+            localStorage.setItem('approve' , payload.Isapproved);
+            localStorage.setItem('IB-uName' , payload.firstName);
+            localStorage.setItem('IB-uid' , payload.id);
             // state.msg = payload.message;
         },
         [loginUser.rejected]: (state , action) => {
@@ -57,7 +69,7 @@ const userauthSlice = createSlice({
 })
 
 
-export const {authToken , addRole} = userauthSlice.actions;
+export const {authToken , addRole , addApprove , addName} = userauthSlice.actions;
 export default userauthSlice.reducer; 
 
 

@@ -43,7 +43,6 @@ h1 {
   }
   
   .s-sidebar__trigger .icons > .nav--btn {
-     display: inline-block;
      margin: 0em 15px 0 15px;
      color: #f07ab0;
    }

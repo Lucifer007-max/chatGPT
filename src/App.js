@@ -12,6 +12,7 @@ import Profile from './components/Client/pages/Profile';
 import Adminlogin from './components/Admin/pages/Adminlogin';
 import Adminauth from './components/routes/Adminauth'
 import ProtectedRoutes from './components/routes/ProtectedRoutes';
+import Registercomplete from './components/Client/pages/Registercomplete'
 function App() {
   return( 
   <Routes>
@@ -20,8 +21,8 @@ function App() {
       <Route path="/"  element={<Client />} />
       <Route path="/register"  element={<Register />} />
       <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
-      <Route path="/profile/:id" element={<Profile />} />
-
+      <Route path="/profile/:id" element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
+      <Route path="/completeReg/:id" element={<Registercomplete />} />
 
 
 
@@ -29,7 +30,7 @@ function App() {
       <Route path='/administrator/login' element={<Adminlogin/>} />
       <Route path='/admin' element={ <Adminauth><Admin/></Adminauth>} />
       <Route path='/userList' element={<UserList/>} />
-      <Route path='/register-management' element={<Registermanage/>} />
+      <Route path='/register-management/' element={<Registermanage/>} />
 
 
 

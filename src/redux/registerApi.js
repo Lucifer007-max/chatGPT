@@ -6,6 +6,14 @@ export const registerApi = createApi({
     tagTypes: ['Register'],
     baseQuery: fetchBaseQuery({baseUrl: config.API}),
     endpoints: (builder)=> ({
+        // user Register
+        userRegister : builder.mutation({
+            query: userReg => ({
+                url: 'users/registerUser',
+                method: 'POST',
+                body: userReg
+            })
+        }),
         // Category API ----
         categoryCreate: builder.mutation({
             query: category => ({
@@ -56,5 +64,6 @@ export const registerApi = createApi({
 export const {
     useCategoryCreateMutation , useCategoryGetQuery  , 
     useProfessionCreateMutation , useProfessionGetQuery,
-    useFinalistGetQuery , useFinallistDeleteMutation
+    useFinalistGetQuery , useFinallistDeleteMutation ,
+    useUserRegisterMutation
 } = registerApi;

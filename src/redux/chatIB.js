@@ -18,11 +18,11 @@ export const chatIB = createApi({
             invalidatesTags: ['chatIB']
         }),
         codegGet:  builder.query({
-            query: ()=> '/openibAI/coderesult',
-            providesTags : ['Register']
+            query: (id)=> `openibAI/codeByid/${id}`,
+            providesTags : ['chatIB']
         }),
     })
 })
-export const { useCodeTypeMutation } = chatIB;
+export const { useCodeTypeMutation , useCodegGetQuery } = chatIB;
 // export const { useCodeTypeMutation } =chat;
 // export const  { useCodeTypeMutation } = chatIB

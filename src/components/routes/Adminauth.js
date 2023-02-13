@@ -6,7 +6,7 @@ function Adminauth({children}) {
     const isToken = localStorage.getItem("token"); 
     const isRole = localStorage.getItem("role"); 
     if(!isToken){
-        return <Navigate to={'/'}/>
+        return <Navigate to={'/administrator/login'}/>
     }
     else{
         if(isRole === 'admin'){

@@ -1,8 +1,23 @@
-import {React, useState} from 'react'
+import {React, useEffect, useState} from 'react'
 import Skeleton from '@mui/material/Skeleton';
+import { useCodegGetQuery } from '../../../redux/chatIB';
 function Chat() {
-    const [data, setdata] = useState('')
-    // setdata()
+    
+    const [name, setName] = useState('')
+    // const [userID , setuserID]   = useState(localStorage.getItem('IB-uid'));
+    // setuserID( localStorage.getItem('IB-uid'))
+    const id =  localStorage.getItem('IB-uid')
+    const {data , isLoading , isFetching , isSuccess  , error}  = useCodegGetQuery(id);
+    useEffect(() => {
+        console.log(data);
+      setName( localStorage.getItem('IB-uName'))
+    }, [])
+    
+    
+
+
+
+ // setName()
   return (
     <div className='conatiner'>
         <div className='container'>
@@ -12,57 +27,59 @@ function Chat() {
                 </div>
                 <div className='col-lg-12 p-0'>
                     <div className='chat--area text-light '>
-                        <div className='ib-chat--ai-box bg-ai-chat'>
-                            <div className=' w-80'>
-                              <div className='mob-padding d-flex'>
-                                    <figure>
-                                        <div className='ib-ai-profile'>
-                                            a
-                                        </div>
-                                    </figure>
-                                    {
-                                        data === ''? 
-                                            <div className='flex-column d-flex w-100 px-2'>
-                                            <Skeleton />
-                                            <Skeleton />
-                                            <Skeleton />
-                                            <Skeleton />
-                                            <Skeleton />
+                {isLoading && <div className='flex-column d-flex w-100 py-2'><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /></div>}
+                {isFetching && <div className='flex-column d-flex w-100 py-2'><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /></div>}
+                {isSuccess && 
+                (
+                    <>
+                        {
+                            data.map((list,i) => {
+                                return(
+                                    <div key={i}>
+                                        <div className='ib-chat--ai-box bg-user-chat'>
+                                            <div className='w-80'>
+                                                <div className='mob-padding d-flex flex-row-reverse'>
+                                                    <figure>
+                                                        <div className='ib-ai-profile'>
+                                                            {name === ''? '' : name}
+                                                        </div>
+                                                        {/* <div className='ib-ai-profile'>
+                                                            C
+                                                        </div> */}
+                                                    </figure>
+                                                    <div className='chat-txt-user'>
+                                                      {list.queryPrompt}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        :
-                                        <div  className='chat-txt-ai'>
-                                            Jun 2022
-                                            Disclaimer
-                                            Although many people said 'it worked' and very few say 'it didn't'.
-
-                                            It is hard to say what could be the cause and it is not working. Personally, the solution provided below worked for me and I didn't get any issues so far hence I am sharing this.
-
-                                            I don't suggest uninstalling, so you can basically back up the file and try this solution. If it doesn't work then place those files again.
                                         </div>
-                                    }
-                              </div>
-                            </div>
-                        </div>
-                        <div className='ib-chat--ai-box bg-user-chat'>
-                            <div className='     w-80'>
-                                <div className='mob-padding d-flex flex-row-reverse'>
-                                    <figure>
-                                        <div className='ib-ai-profile'>
-                                            a
+                                        <div className='ib-chat--ai-box bg-ai-chat' key={i}>
+                                            <div className=' w-80'>
+                                            <div className='mob-padding d-flex'>
+                                                    <figure>
+                                                        {/* <div className='ib-ai-profile'> */}
+                                                            <img src="https://th.bing.com/th/id/OIP.5KkuJ0DyoNuLtoV6Kt1wDwHaHa?pid=ImgDet&rs=1" width={40} alt='ib-logo' className='mt-3' />
+                                                        {/* </div> */}
+                                                    </figure>
+                                                        <div  className='chat-txt-ai'>
+                                                        {/* <code>
+                                                        <pre> */}
+                                                           {list.result}
+
+                                                        {/* </pre>
+
+                                                        </code> */}
+                                                        </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </figure>
-                                    <div className='chat-txt-user'>
-                                        Jun 2022
-                                        Disclaimer
-                                        Although many people said 'it worked' and very few say 'it didn't'.
-
-                                        It is hard to say what could be the cause and it is not working. Personally, the solution provided below worked for me and I didn't get any issues so far hence I am sharing this.
-
-                                        I don't suggest uninstalling, so you can basically back up the file and try this solution. If it doesn't work then place those files again.
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                )
+                            })
+                        }
+                    </>
+                )
+                }
                     </div>
                 </div>
                 {/* <div className='form--area'>
