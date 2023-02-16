@@ -1,52 +1,39 @@
 import * as React from 'react';
-import { useState , useEffect } from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from 'react-bootstrap/Modal';
 import Button from '@mui/material/Button';
 import Form from 'react-bootstrap/Form';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { useProfessionGetQuery , useCategoryGetQuery } from '../../../redux/registerApi';
+import { useCategoryNameByProfessionQuery ,useUserRegisterCompleteMutation } from '../../../redux/registerApi';
+import { useNavigate } from 'react-router-dom';
 function Registercomplete() {
-  const [show, setShow] = React.useState(true);
-  const [optionselect , setOptionselect] = React.useState('');
-  const handleClose = () => setShow(true);
-
-
-  const {data:prolist} = useProfessionGetQuery();
-  const {data:catlist} = useCategoryGetQuery();
-  const [professionlist , setProfession] = useState('');
-  const [categorylist , setCategory] = useState('');
-  
-    useEffect(() => {
-        for (let j in prolist){
-            setProfession(prolist[j].professionName)
+    const handleClose = () => setShow(true);
+    const [show, setShow] = React.useState(true);
+    const [optionselect , setOptionselect] = React.useState('');
+    const proID = localStorage.getItem('proID')
+    const {data:catlist} = useCategoryNameByProfessionQuery(proID);
+     const gender = ['Male' , 'Female' , 'Others'];
+    const [userRegisterComplete] = useUserRegisterCompleteMutation();
+    const [genderselect , setGender] = useState(null);
+    const [date , setDate] = useState(null);
+    const [uID] = useState(localStorage.getItem('IB-uid'));
+    const navigate = useNavigate();
+    const handleSubmit =  (e) => {
+        if(genderselect === '') {
+            alert('please Enter Gender')
         }
-    }, [prolist])
-    useEffect(() => {
-        // for (let i =0; i < catlist.length; i++){
-        //      setCategory(catlist.categoryName)
-        //     // console.log("??????????????????" , catlist[j].categoryName);
-        // }
-        }, [catlist])
-        
-        // console.log(catlist, " sselect");
-        // console.log(categorylist, "Namepro");
-    
-
-
-
-// console.log(professionlist);
-  const profession = [professionlist , 'Maharastra'];
-  const gender = ['Male' , 'Female' , 'Others'];
-//   debugger
-  const category = {
-    professionlist : [categorylist],
-      'Maharastra' : ['Pune' ,  'Nagpur' , 'Bardi' , 'SEZ mihin']
-  }
-  const handleSubmit = (e) => {
-      alert('hi')
-  }
+        if(optionselect === '') {
+            alert('please select Category')
+        }
+        else{
+            var data = {"category": optionselect ,  "gender": genderselect ,"dob":date}
+            userRegisterComplete({uID,data})
+            // navigate('/home')
+        }
+    }
+   
 
   return (
     <Modal show={show} onHide={handleClose}  size="lg" centered>
@@ -63,27 +50,20 @@ function Registercomplete() {
                                 {/* <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                 <TextField select label="Select your Category" helperText="Select your Category" variant="standard" className='w-100'> */}
                                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                <TextField select label="Select your Profession"  variant="standard" className='w-100' onChange={(e) => { setOptionselect(e.target.value)}}>
-                                        {profession.map((option) => (<MenuItem key={option} value={option}>{option} </MenuItem> ))}
-                                    </TextField>
-                                </Box>
-                            </Form.Group>
-                            <Form.Group className="mb-4 col-lg-6">
-                                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                {optionselect &&<TextField select label="Select your Category" variant="standard" className='w-100'>
-                                        {category[optionselect]?.map((option) => (<MenuItem key={option} value={option}>{option} </MenuItem> ))}
-                                    </TextField>}
+                                <TextField select label="Select your Category"   variant="standard" className='w-100' onChange={(e) => { setOptionselect(e.target.value)}}>
+                                    {catlist?.map((data , i,) => (<MenuItem key={i} value={data.id}>{data.categoryName} </MenuItem> ))}
+                                </TextField>
                                 </Box>
                             </Form.Group>
                             <Form.Group className="mb-4 col-lg-6">
                                 <small className='small'>Select Your DOB</small>
                                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                    <input type="date" className='form-control date-input px-0' />
+                                    <input type="date" className='form-control date-input px-0' name='date' value={date} onChange={(e)=> setDate(e.target.value)} />
                                 </Box>
                             </Form.Group>
                             <Form.Group className="mb-4 col-lg-6">
                                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                <TextField select label="Select your Gender" variant="standard" className='w-100'>
+                                <TextField select label="Select your Gender" variant="standard" className='w-100' onChange={(e)=> {setGender(e.target.value)}}>
                                         {gender.map((option) => (<MenuItem key={option} value={option}>{option} </MenuItem> ))}
                                     </TextField>
                                 </Box>

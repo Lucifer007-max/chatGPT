@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../redux/userSlice';
 import {useNavigate } from 'react-router-dom';
 // import Home from './Home';
+import Swal from 'sweetalert2';
 function Login() {
     const formData = {email: '', password: '' }
     const [responseBody, setResponseBody] = React.useState(formData)
@@ -22,8 +23,15 @@ function Login() {
     const navigate = useNavigate();
     const handleformSubmit = async (e) => {
         e.preventDefault();
-        await dispatcher(loginUser(responseBody ))
+        await dispatcher(loginUser(responseBody))
         navigate('/home')
+        Swal.fire({
+            position: 'top-right',
+            type: 'success',
+            title: 'Login Successful',
+            showConfirmButton:false,
+            timer:2500,
+        });
     }
     return (
         <section className='theme_color' id='login-section'>

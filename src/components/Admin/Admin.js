@@ -11,7 +11,7 @@ function Admin() {
           <Sidebar/>
       </div>
         <main className="s-layout__content">
-              <Dashboard />
+            <Dashboard />
         </main>
       </div>
       <Footer/>

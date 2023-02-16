@@ -1,16 +1,25 @@
-import React  from 'react';
+import {React , useState}  from 'react';
 import { useEffect } from 'react';
 import Card from '../shared/Card';
 import { Chart } from "react-google-charts";
-
+import { useTotalUserCountQuery , useApproveUserCountQuery } from '../../../redux/registerApi';
 function Dashboard(title, count) {
-  const [cardData, setcardData] = React.useState([]);
+  const [cardData, setcardData] = useState([]);
+  const [usercountNo , setUserCount] = useState('0')
+  const [approveusercountNo , setApproveUserCount] = useState('0')
+  const {data:usercount} = useTotalUserCountQuery();
+  const {data:approveusercount} = useApproveUserCountQuery();
+  useEffect(() => {
+    setUserCount(usercount)
+    setApproveUserCount(approveusercount)
+  }, [usercount , approveusercount])
+  
   // React.useEffect(() => { 
   //   fetch('/api/dashboard') 
   //   .then(res => res.json)
   //    .then(data => { setcardData(data)
   // },[]);
- const data = [
+ var data = [
     [
       "Day",
       "Guardians of the Galaxy",
@@ -60,10 +69,10 @@ function Dashboard(title, count) {
               })
             } */}
             <div className='col-lg-3 col-sm-6 col-md-6 col-12 mb-3'>
-              <Card title={"Total User"} count={"2"}/>
+              <Card title={"Total User"} count={usercountNo}/>
             </div>
             <div className='col-lg-3 col-sm-6 col-md-6 col-12 mb-3'>
-              <Card title={"Total Profession"} count={"0"}/>
+              <Card title={"Approved User"} count={approveusercountNo}/>
             </div>
             <div className='col-lg-3 col-sm-6 col-md-6 col-12 mb-3'>
               <Card title={"Total Category"} count={"0"}/>

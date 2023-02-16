@@ -22,7 +22,7 @@ function Sidebar() {
                 </li>
                 <li>
                     <NavLink className="s-sidebar__nav-link" to='/userList'>
-                    <i className="fa fa-user"></i><em>All Users</em>
+                    <i className="fa fa-user-plus"></i><em>All Users</em>
                     </NavLink>
                 </li>
                 <li>

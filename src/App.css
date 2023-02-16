@@ -1,15 +1,16 @@
-.theme_color{
-    /* background: linear-gradient(181deg, #00152f,#00152f, #004177); */
-}
-body::-webkit-scrollbar-thumb {
-    --tw-border-opacity: 1;
-    background-color: rgba(217,217,227,.8);
-    border-color: rgba(255,255,255,var(--tw-border-opacity));
-    border-radius: 9999px;
-    border-width: 1px;
-}
-
-body::-webkit-scrollbar-track {
-    background-color: transparent;
-    border-radius: 9999px;
-}
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #192b3c; 
+    border-radius: 10px;
+  }

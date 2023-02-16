@@ -6,7 +6,7 @@ function ProtectedRoutes({ children }) {
   const isRole = localStorage.getItem("role"); 
   const approve = localStorage.getItem('approve')
   const id = localStorage.getItem('IB-uid');
-  if(!isToken){
+    if(!isToken){
       return <Navigate to={'/'}/>
     }
     if(isRole === 'user') {
@@ -16,6 +16,8 @@ function ProtectedRoutes({ children }) {
         else {
             return <Navigate to={`/completeReg/${id}`}/>
         }
+    }else{
+        return <Navigate to={'/'}/>
     }
 }
 

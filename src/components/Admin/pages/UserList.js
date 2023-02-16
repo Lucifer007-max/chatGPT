@@ -2,33 +2,38 @@ import {React , useState , useEffect} from 'react'
 import Sidebar from '../shared/Sidebar';
 import config from '../../../config';
 import axios  from 'axios';
+import moment from 'moment';
+
+import { useUserListGetQuery ,useUserStatusMutation, useUserDeleteMutation } from '../../../redux/userlistApi';
 function UserList() {
-    const [state, setState] = useState(''); 
+    
+    
+    const {data:userList} = useUserListGetQuery();
+    const [state, setState] = useState(['']); 
+
+    const [userStatus] = useUserStatusMutation();
+
+       
+    const [userDelete] =useUserDeleteMutation();
     useEffect(() => {
-        axios.get(config.API + 'users/getUsers')
-        .then(((res)  => { setState(res.data.response)})) 
-        .catch((error) => {console.log(error)})
-    }, [])
-
-    const handleApprove = (id)  => {
+        setState(userList)
+        // console.log(userList);
+    }, [userList])
+    
+    const handleApprove =async (id)  => {
         var approve = {Isapproved : '1'}
-        axios.put(config.API + 'users/approveUser/'+ id , approve)
-        .then(((res)  => {console.log(res)})) 
-        .catch((error) => {console.log(error)})
-
+        await userStatus({id , approve})
     };
-    const handleReject = (id)  => {
+    const handleReject = async (id)  => {
         var approve = {Isapproved : '0'}
-        axios.put(config.API + 'users/approveUser/'+ id , approve)
-        .then(((res)  => {console.log(res)})) 
-        .catch((error) => {console.log(error)})
+        await userStatus({id , approve})
     };
-
-    const handleDelete = (id) => {
-        axios.delete(config.API + 'users/deleteUser/'+ id )
-        .then(((res)  => {console.log(res)})) 
-        .catch((error) => {console.log(error)})
-    }
+    const handleDelete = async (id) => {
+        await userDelete(id)
+        // axios.delete(config.API + 'users/deleteUser/'+ id )
+        // .then(((res)  => {console.log(res)})) 
+        // .catch((error) => {console.log(error)})
+    };
 
 
   return (
@@ -49,6 +54,7 @@ function UserList() {
                                   <th scope="col">First Name</th>
                                   <th scope="col">Last Name</th>
                                   <th scope="col">Email</th>
+                                  <th scope="col">Password</th>
                                   <th scope="col">Mobile No</th>
                                   <th scope="col">Profession</th>
                                   <th scope="col">Category</th>
@@ -60,15 +66,16 @@ function UserList() {
                               {
                                   state ?
                                       state.map((data, i ,  key) =>
-                                          <tr key={key}>
+                                          <tr key={i}>
                                               <td>{++i}</td>
                                               <td>{data.firstName}</td>
                                               <td>{data.lastName}</td>
                                               <td>{data.email}</td>
+                                              <td>{data.hash}</td>
                                               <td>{data.mobileNo}</td>
                                               <td>{data.profession ? data.profession : "--"}</td>
                                               <td>{data.category ? data.category : "--"}</td>
-                                              <td>{data.createdAt}</td>
+                                              <td>{moment(data.createdAt).format('YY-MM-DD')}</td>
                                               <td>
                                                   <button className='btn btn-sm btn-danger' onClick={() => handleDelete(data.id)}><i className='fa fa-trash'></i></button>
                                                   {

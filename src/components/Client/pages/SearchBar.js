@@ -3,7 +3,7 @@ import SendIcon from '@mui/icons-material/Send';
 function SearchBar() {
   const [search, setSearch] = useState('')
   const handleSearch = () => {
-      console.log(search);
+    console.log(search);
   }
   return (
     <div className='container main--cont  p-0'>

@@ -57,6 +57,9 @@ const userauthSlice = createSlice({
             localStorage.setItem('approve' , payload.Isapproved);
             localStorage.setItem('IB-uName' , payload.firstName);
             localStorage.setItem('IB-uid' , payload.id);
+            localStorage.setItem('currentTIME' , payload.syncedAt);
+            localStorage.setItem('proID' , payload.profession);
+
             // state.msg = payload.message;
         },
         [loginUser.rejected]: (state , action) => {

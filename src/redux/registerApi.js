@@ -1,6 +1,7 @@
 import {createApi , fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import config from '../config';
 
+// debugger
 export const registerApi = createApi({
     reducerPath: "registerApi",
     tagTypes: ['Register'],
@@ -14,6 +15,25 @@ export const registerApi = createApi({
                 body: userReg
             })
         }),
+        // console.log(userData),
+        userRegisterComplete : builder.mutation({
+            query: (patch) => ({
+                url: `users/userUpadte/${patch.uID}`,
+                method: 'PUT',
+                body: patch.data
+            })
+        }),
+
+        totalUserCount:  builder.query({
+            query: ()=> `users/membercount/`,
+            providesTags : ['Register']
+        }),
+        approveUserCount: builder.query({
+            query: ()=> `users/approvemembercount/`,
+            providesTags : ['Register']
+        }),
+        
+        
         // Category API ----
         categoryCreate: builder.mutation({
             query: category => ({
@@ -27,8 +47,14 @@ export const registerApi = createApi({
             query: ()=> '/category/categoryGet',
             providesTags : ['Register']
         }),
-
-
+        categoryNameGet: builder.query({
+            query: ()=> '/category/cName',
+            providesTags : ['Register']
+        }),
+        categoryNameByProfession: builder.query({
+            query: (id) => `category/categoryByPro/${id}`,
+            providesTags: ['Register']
+        }),
         // Profession API ----
         professionCreate: builder.mutation({
             query: profession => ({
@@ -54,7 +80,7 @@ export const registerApi = createApi({
                 method: 'DELETE',
             }),
             invalidatesTags: ['Register']
-        })
+        }),
     })
 
 })
@@ -65,5 +91,7 @@ export const {
     useCategoryCreateMutation , useCategoryGetQuery  , 
     useProfessionCreateMutation , useProfessionGetQuery,
     useFinalistGetQuery , useFinallistDeleteMutation ,
-    useUserRegisterMutation
+    useUserRegisterMutation ,useCategoryNameGetQuery ,
+    useUserRegisterCompleteMutation , useTotalUserCountQuery,
+    useApproveUserCountQuery , useCategoryNameByProfessionQuery
 } = registerApi;
