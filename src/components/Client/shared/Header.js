@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 function Header() {
-  const [userName , setUsername] = useState(localStorage.getItem('IB-uName'));
+  const [userName] = useState(localStorage.getItem('IB-uName'));
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.clear();

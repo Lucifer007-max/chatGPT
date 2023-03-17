@@ -17,7 +17,7 @@ function Adminlogin() {
     <div>
         <div className="container">
             <div className="row justify-content-md-center">
-                <div className="col-md-12 col-lg-4">
+                <div className="col-md-12 col-lg-5 col-md-5 col-sm-12">
                     <div className="card login-box-container">
                         <div className="card-body">
                             <div className="authent-logo d-none">

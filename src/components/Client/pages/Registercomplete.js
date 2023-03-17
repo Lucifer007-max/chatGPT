@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useCategoryNameByProfessionQuery ,useUserRegisterCompleteMutation } from '../../../redux/registerApi';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 function Registercomplete() {
     const handleClose = () => setShow(true);
     const [show, setShow] = React.useState(true);
@@ -19,7 +19,7 @@ function Registercomplete() {
     const [genderselect , setGender] = useState(null);
     const [date , setDate] = useState(null);
     const [uID] = useState(localStorage.getItem('IB-uid'));
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const handleSubmit =  (e) => {
         if(genderselect === '') {
             alert('please Enter Gender')

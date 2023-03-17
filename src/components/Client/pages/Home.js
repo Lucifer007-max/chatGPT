@@ -5,15 +5,15 @@ import Sidebar from '../shared/Sidebar';
 import Chat from './Chat';
 import Header from '../shared/Header'
 import { useCodeTypeMutation } from '../../../redux/chatIB';
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 const Home = () => {
     const [search, setSearch] = useState('')
     const [uid ] = useState(localStorage.getItem('IB-uid'))
     const [codeType] = useCodeTypeMutation();
     const handleSearch = (e) => {
+        setSearch('');
         e.preventDefault();
         codeType({userID: uid , prompt:search})
-        setSearch('');
     }
  
       
@@ -48,7 +48,7 @@ const Home = () => {
                                     <form id='form' className='search-Bar' onSubmit={(e) => handleSearch(e)}>
                                         <div className='w-80'>
                                             <div className='d-flex align-items-center position-relative'>
-                                                <input type='text' placeholder='Search' name='search' onChange={(e)=> setSearch(e.target.value)} className='form-control' />
+                                                <input type='text' placeholder='Search' name='search' onInput={(e)=> setSearch(e.target.value)} className='form-control' />
                                                 <button type='button' className='svgdiv' onClick={(e) => handleSearch(e)}><SendIcon className='send--svg'/></button>
                                             </div>
                                         </div>

@@ -1,4 +1,4 @@
-import {React,useState ,useEffect} from 'react'
+import {React,useState } from 'react'
 import '../assets/css/client.css';
 import Form from 'react-bootstrap/Form';
 import TextField from '@mui/material/TextField';
@@ -45,8 +45,8 @@ function Register() {
         // }
     }
     const {data:prolist} = useProfessionGetQuery('');
-    const [professionlist , setProfession] = useState('Select Your Profession');
-    const [professionlistID , setProfessionID] = useState('');
+    // const [professionlist , setProfession] = useState('Select Your Profession');
+    // const [professionlistID , setProfessionID] = useState('');
     // useEffect(() => {
     //     for (let j in prolist){
     //         setProfession(prolist[j].professionName)

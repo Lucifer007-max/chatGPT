@@ -21,17 +21,30 @@ function Login() {
     }
     const dispatcher = useDispatch();
     const navigate = useNavigate();
+    let user = localStorage.getItem('approve'); 
     const handleformSubmit = async (e) => {
         e.preventDefault();
-        await dispatcher(loginUser(responseBody))
-        navigate('/home')
-        Swal.fire({
-            position: 'top-right',
-            type: 'success',
-            title: 'Login Successful',
-            showConfirmButton:false,
-            timer:2500,
-        });
+        await dispatcher(loginUser(responseBody));
+        console.log(user)
+        if(user === undefined) {
+            Swal.fire({
+                position: 'top-right',
+                type: 'error',
+                title: 'Your Account is not approved !',
+                showConfirmButton:false,
+                timer:2500,
+            });
+            // localStorage.clear()
+        }else {
+            navigate('/home')
+            Swal.fire({
+                position: 'top-right',
+                type: 'success',
+                title: 'Login Successful',
+                showConfirmButton:false,
+                timer:2500,
+            });
+        }
     }
     return (
         <section className='theme_color' id='login-section'>
