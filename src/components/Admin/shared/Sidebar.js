@@ -1,13 +1,18 @@
 import React from 'react'
 import '../../Admin/assets/admin.css';
-import {Link , NavLink} from 'react-router-dom'
+import {NavLink , useNavigate} from 'react-router-dom';
 function Sidebar() {
+    const navigate = useNavigate();
+const handleLogout = () =>{
+    localStorage.clear('token');
+    navigate('/administrator/login');
+}
   return (
     <div className='side'>
         <div className="s-sidebar__trigger" >
-        <h2 className='text-light logo--txt'>CHAT GPT AI</h2>
-            <i className="fa fa-bars">
-            </i>
+        <h2 className='text-light logo--txt'>IB AI</h2>
+            <i className="fa fa-bars icon-nav"></i>
+            <button onClick={handleLogout} className='btn btn-light btn-logout mx-3'><i className='fas fa-logout'></i>Logout</button>
         </div>
         <div>
             <nav className="s-sidebar__nav">

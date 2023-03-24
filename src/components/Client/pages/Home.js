@@ -5,7 +5,6 @@ import Sidebar from '../shared/Sidebar';
 import Chat from './Chat';
 import Header from '../shared/Header'
 import { useCodeTypeMutation } from '../../../redux/chatIB';
-// import { v4 as uuid } from "uuid";
 const Home = () => {
     const [search, setSearch] = useState('')
     const [uid ] = useState(localStorage.getItem('IB-uid'))

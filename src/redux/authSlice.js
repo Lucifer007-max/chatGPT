@@ -51,7 +51,7 @@ const authSlice = createSlice({
             state.loading = false;
             const {payload} = action;
             state.error = payload.message;
-            console.log('Error Msg Admin Login >>>>>>>>>' , payload.message);
+            // console.log('Error Msg Admin Login >>>>>>>>>' , payload.message);
         }
     }
 })

@@ -2,24 +2,24 @@ import {React , useState}  from 'react';
 import { useEffect } from 'react';
 import Card from '../shared/Card';
 import { Chart } from "react-google-charts";
-import { useTotalUserCountQuery , useApproveUserCountQuery } from '../../../redux/registerApi';
+import { useTotalUserCountQuery , useApproveUserCountQuery , useCategoryCountQuery ,useProfessionCountQuery } from '../../../redux/registerApi';
 function Dashboard(title, count) {
-  const [cardData, setcardData] = useState([]);
   const [usercountNo , setUserCount] = useState('0')
   const [approveusercountNo , setApproveUserCount] = useState('0')
+  const [categorycountNo , secategoryCount] = useState('0')
+  const [professionNo , seprfessionCount] = useState('0')
   const {data:usercount} = useTotalUserCountQuery();
   const {data:approveusercount} = useApproveUserCountQuery();
+  const {data:categorycount} = useCategoryCountQuery();
+  const {data:professioncount} = useProfessionCountQuery();
   useEffect(() => {
     setUserCount(usercount)
     setApproveUserCount(approveusercount)
-  }, [usercount , approveusercount])
+    secategoryCount(categorycount)
+    seprfessionCount(professioncount)
+  }, [usercount , approveusercount , categorycount ,professioncount])
   
-  // React.useEffect(() => { 
-  //   fetch('/api/dashboard') 
-  //   .then(res => res.json)
-  //    .then(data => { setcardData(data)
-  // },[]);
- var data = [
+  var data = [
     [
       "Day",
       "Guardians of the Galaxy",
@@ -42,32 +42,11 @@ function Dashboard(title, count) {
     [14, 4.2, 6.2, 3.4],
   ];
 
-
-  useEffect(() => {
-
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(json => setcardData(json))
-  
-    return () => {
-      
-    }
-  }, [])
-
   return (
     <div>
       <div className='container padding-mob pt-5'>
-        {/* Dashboard Crads Start */}
+        {/* Dashboard cards Start */}
         <div className='row'>
-            {/* {
-              cardData.map((data, key) => {
-                return (
-                <div className='col-lg-3 col-sm-6 col-md-6 col-12 mb-3'  key={key}>
-                      <Card title={data.name} count={data.id}/>
-                </div>
-                )
-              })
-            } */}
             <div className='col-lg-3 col-sm-6 col-md-6 col-12 mb-3'>
               <Card title={"Total User"} count={usercountNo}/>
             </div>
@@ -75,18 +54,22 @@ function Dashboard(title, count) {
               <Card title={"Approved User"} count={approveusercountNo}/>
             </div>
             <div className='col-lg-3 col-sm-6 col-md-6 col-12 mb-3'>
-              <Card title={"Total Category"} count={"0"}/>
+              <Card title={"Total Category"} count={categorycountNo}/>
             </div>
-        </div>
-        {/* Dashboard Crads Ends */}
-        <Chart
+            <div className='col-lg-3 col-sm-6 col-md-6 col-12 mb-3'>
+              <Card title={"Total Profession"} count={professionNo}/>
+            </div>
+          </div>
+        {/* </div> */}
+        {/* Dashboard cards Ends */}
+        {/* <Chart
           chartType="ScatterChart"
           data={data}
           width="100%"
           height="400px"
           options={{backgroundColor: "#1a2039" , color:"white" }}
           legendToggle
-        />
+        /> */}
       </div>
     </div>
   )

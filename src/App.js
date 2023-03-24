@@ -1,6 +1,5 @@
 import './App.css';
 import Admin from './components/Admin/Admin';
-import Client from './components/Client/Client';
 import NotFound from './components/NotFound'
 import {Routes, Route,} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';

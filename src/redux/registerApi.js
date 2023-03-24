@@ -55,6 +55,10 @@ export const registerApi = createApi({
             query: (id) => `category/categoryByPro/${id}`,
             providesTags: ['Register']
         }),
+        categoryCount: builder.query({
+            query: ()=> '/users/Categorycount',
+            providesTags : ['Register']
+        }),
         // Profession API ----
         professionCreate: builder.mutation({
             query: profession => ({
@@ -66,6 +70,10 @@ export const registerApi = createApi({
         }),
         professionGet: builder.query({
             query: ()=> '/profession/professionGet',
+            providesTags : ['Register']
+        }),
+        professionCount: builder.query({
+            query: ()=> '/users/Professioncount',
             providesTags : ['Register']
         }),
         
@@ -93,5 +101,6 @@ export const {
     useFinalistGetQuery , useFinallistDeleteMutation ,
     useUserRegisterMutation ,useCategoryNameGetQuery ,
     useUserRegisterCompleteMutation , useTotalUserCountQuery,
-    useApproveUserCountQuery , useCategoryNameByProfessionQuery
+    useApproveUserCountQuery , useCategoryNameByProfessionQuery, 
+    useCategoryCountQuery ,useProfessionCountQuery
 } = registerApi;

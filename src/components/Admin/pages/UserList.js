@@ -1,7 +1,5 @@
 import {React , useState , useEffect} from 'react'
 import Sidebar from '../shared/Sidebar';
-import config from '../../../config';
-import axios  from 'axios';
 import moment from 'moment';
 
 import { useUserListGetQuery ,useUserStatusMutation, useUserDeleteMutation } from '../../../redux/userlistApi';
@@ -55,7 +53,7 @@ function UserList() {
                                   <th scope="col">Last Name</th>
                                   <th scope="col">Email</th>
                                   <th scope="col">Password</th>
-                                  <th scope="col">Mobile No</th>
+                                  {/* <th scope="col">Mobile No</th> */}
                                   <th scope="col">Profession</th>
                                   <th scope="col">Category</th>
                                   <th scope="col">Joining Date</th>
@@ -72,9 +70,9 @@ function UserList() {
                                               <td>{data.lastName}</td>
                                               <td>{data.email}</td>
                                               <td>{data.hash}</td>
-                                              <td>{data.mobileNo}</td>
-                                              <td>{data.profession ? data.profession : "--"}</td>
-                                              <td>{data.category ? data.category : "--"}</td>
+                                              {/* <td>{data.mobileNo}</td> */}
+                                              <td>{data.professionName ? data.professionName : "--"}</td>
+                                              <td>{data.categoryName ? data.categoryName : "--"}</td>
                                               <td>{moment(data.createdAt).format('YY-MM-DD')}</td>
                                               <td>
                                                   <button className='btn btn-sm btn-danger' onClick={() => handleDelete(data.id)}><i className='fa fa-trash'></i></button>

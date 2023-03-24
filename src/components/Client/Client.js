@@ -1,10 +1,6 @@
 import React from 'react'
-import Header from './shared/Header'
 import Footer from './shared/Footer'
-import Login from './pages/Login'
-import { Route } from 'react-router-dom'
-import Register from './pages/Register'
-import { Home } from '@mui/icons-material'
+
 
 function Client() {
   return (

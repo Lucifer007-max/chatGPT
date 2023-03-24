@@ -25,26 +25,27 @@ function Login() {
     const handleformSubmit = async (e) => {
         e.preventDefault();
         await dispatcher(loginUser(responseBody));
-        console.log(user)
-        if(user === undefined) {
-            Swal.fire({
-                position: 'top-right',
-                type: 'error',
-                title: 'Your Account is not approved !',
-                showConfirmButton:false,
-                timer:2500,
-            });
-            // localStorage.clear()
-        }else {
+        // console.log(user)
+        // console.log(responseBody.payload)
+        // if(user === undefined) {
+        //     Swal.fire({
+        //         position: 'top-right',
+        //         type: 'error',
+        //         title: 'Your Account is not approved !',
+        //         showConfirmButton:false,
+        //         timer:2500,
+        //     });
+        //     // localStorage.clear()
+        // }else {
             navigate('/home')
-            Swal.fire({
-                position: 'top-right',
-                type: 'success',
-                title: 'Login Successful',
-                showConfirmButton:false,
-                timer:2500,
-            });
-        }
+            // Swal.fire({
+            //     position: 'center',
+            //     type: 'success',
+            //     title: 'Welcome User',
+            //     text:'Please Complete Your Profile Continue',
+            //     showConfirmButton:true,
+            // });
+        // }
     }
     return (
         <section className='theme_color' id='login-section'>
